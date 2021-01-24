@@ -106,15 +106,16 @@ Public Enum SystemPowerState
     Maximum
 End Enum
 
+'https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-system_power_capabilities
 Public Type SystemPowerCapabilities
     boolPowerButtonPresent   As Byte ' [MarshalAs(UnmanagedType.I1)]
     boolSleepButtonPresent   As Byte ' [MarshalAs(UnmanagedType.I1)]
     boolLidPresent           As Byte ' [MarshalAs(UnmanagedType.I1)]
-    boolSystemS1             As Byte ' [MarshalAs(UnmanagedType.I1)]
-    boolSystemS2             As Byte ' [MarshalAs(UnmanagedType.I1)]
-    boolSystemS3             As Byte ' [MarshalAs(UnmanagedType.I1)]
-    boolSystemS4             As Byte ' [MarshalAs(UnmanagedType.I1)]
-    boolSystemS5             As Byte ' [MarshalAs(UnmanagedType.I1)]
+    boolSystemS1 As Byte             ' [MarshalAs(UnmanagedType.I1)]
+    boolSystemS2 As Byte             ' [MarshalAs(UnmanagedType.I1)]
+    boolSystemS3 As Byte             ' [MarshalAs(UnmanagedType.I1)]
+    boolSystemS4 As Byte             ' [MarshalAs(UnmanagedType.I1)]
+    boolSystemS5 As Byte             ' [MarshalAs(UnmanagedType.I1)]
     boolHiberFilePresent     As Byte ' [MarshalAs(UnmanagedType.I1)]
     boolFullWake             As Byte ' [MarshalAs(UnmanagedType.I1)]
     boolVideoDimPresent      As Byte ' [MarshalAs(UnmanagedType.I1)]
@@ -126,9 +127,9 @@ Public Type SystemPowerCapabilities
     ProcessorMinimumThrottle As Byte
     ProcessorMaximumThrottle As Byte
     boolFastSystemS4         As Byte ' [MarshalAs(UnmanagedType.I1)]
-    spare2(1 To 3)           As Byte ' [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
+    spare2(1 To 3) As Byte           ' [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
     boolDiskSpinDown         As Byte ' [MarshalAs(UnmanagedType.I1)]
-    spare3(1 To 8)           As Byte ' public byte[] [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
+    spare3(1 To 8) As Byte           ' public byte[] [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
 
     boolSystemBatteriesPresent As Byte '[MarshalAs(UnmanagedType.I1)]
     boolBatteriesAreShortTerm  As Byte '[MarshalAs(UnmanagedType.I1)]
@@ -225,6 +226,20 @@ Public Enum RestartRestrictions
     NotOnReboot = &H8& '/// <summary>Do not restart when the application is terminated because of a system reboot.</summary>
 End Enum
 
+Public Function SystemPowerState_ToStr(e As SystemPowerState) As String
+    Dim s As String
+    Select Case e
+    Case SystemPowerState.Unspecified: s = "Unspecified"
+    Case SystemPowerState.Working:     s = "Working"
+    Case SystemPowerState.Sleeping1:   s = "Sleeping1"
+    Case SystemPowerState.Sleeping2:   s = "Sleeping2"
+    Case SystemPowerState.Sleeping3:   s = "Sleeping3"
+    Case SystemPowerState.Hibernate:   s = "Hibernate"
+    Case SystemPowerState.Shutdown:    s = "Shutdown"
+    Case SystemPowerState.Maximum:     s = "Maximum"
+    End Select
+    SystemPowerState_ToStr = s
+End Function
 
 'internal static class Power
 '{

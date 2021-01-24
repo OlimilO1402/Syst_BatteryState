@@ -154,9 +154,11 @@ End Property
 '        }
 '    }
 Public Property Get IsMonitorOn() As Boolean
+'TODO:
     IsMonitorOn = m_isMonitorOn
 End Property
 Private Property Let IsMonitorOn(ByVal Value As Boolean)
+'TODO:
     m_isMonitorOn = Value
 End Property
 
@@ -178,6 +180,7 @@ End Property
 '        }
 '    }
 Public Property Get IsUpsPresent() As Boolean
+'TODO:
     Dim aSystemPowerCapabilities As SystemPowerCapabilities: aSystemPowerCapabilities = MPower.GetSystemPowerCapabilities
     If aSystemPowerCapabilities.boolBatteriesAreShortTerm Then
         IsUpsPresent = CBool(aSystemPowerCapabilities.boolSleepButtonPresent)
@@ -219,9 +222,11 @@ End Property
 '        }
 '    }
 Public Property Get MonitorRequired() As Boolean
+'TODO:
     MonitorRequired = m_monitorRequired
 End Property
 Public Property Let MonitorRequired(ByVal Value As Boolean)
+'TODO:
     m_monitorRequired = Value
 End Property
 

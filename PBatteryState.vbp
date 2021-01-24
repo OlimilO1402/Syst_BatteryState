@@ -4,6 +4,7 @@ Form=Forms\Form1.frm
 Module=MPower; Modules\MPowerProf.bas
 Module=MPowerManager; Modules\MPowerManager.bas
 Class=BatteryState; Classes\BatteryState.cls
+Class=PowerCaps; Classes\PowerCaps.cls
 ResFile32="Resources\MyRes.RES"
 IconForm="Form1"
 Startup="Form1"

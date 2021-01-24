@@ -5,10 +5,19 @@ Begin VB.Form Form1
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   5895
+   Icon            =   "Form1.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3855
    ScaleWidth      =   5895
    StartUpPosition =   3  'Windows-Standard
+   Begin VB.CommandButton Command2 
+      Caption         =   "PowerCapabilities"
+      Height          =   375
+      Left            =   2520
+      TabIndex        =   2
+      Top             =   120
+      Width           =   2295
+   End
    Begin VB.TextBox Text1 
       BeginProperty Font 
          Name            =   "Consolas"
@@ -33,7 +42,7 @@ Begin VB.Form Form1
       Left            =   120
       TabIndex        =   0
       Top             =   120
-      Width           =   2535
+      Width           =   2295
    End
 End
 Attribute VB_Name = "Form1"
@@ -51,6 +60,11 @@ Option Explicit
 Private Sub Command1_Click()
     Dim BatS As BatteryState: Set BatS = MPowerManager.GetCurrentBatteryState
     Text1.Text = BatS.ToStr
+End Sub
+
+Private Sub Command2_Click()
+    Dim SPwrC As PowerCaps: Set SPwrC = New PowerCaps ' MpowerManager.
+    Text1.Text = SPwrC.ToStr
 End Sub
 
 Private Sub Form_Resize()
