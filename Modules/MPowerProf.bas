@@ -148,14 +148,10 @@ Private Const SendChange                As Long = 2& 'u
 Private Const UpdateInFile              As Long = 1& 'u
 
 Public Enum PowerPersonality
-    '/// <summary>The power personality Guid does not match a known value.</summary>
-    PPUnknown
-    '/// <summary>Power settings designed to deliver maximum performance at the expense of power consumption savings.</summary>
-    HighPerformance
-    '/// <summary>Power settings designed consume minimum power at the expense of system performance and responsiveness.</summary>
-    PowerSaver
-    '/// <summary>Power settings designed to balance performance and power consumption.</summary>
-    Automatic
+    PPUnknown       '/// <summary>The power personality Guid does not match a known value.</summary>
+    HighPerformance '/// <summary>Power settings designed to deliver maximum performance at the expense of power consumption savings.</summary>
+    PowerSaver      '/// <summary>Power settings designed consume minimum power at the expense of system performance and responsiveness.</summary>
+    Automatic       '/// <summary>Power settings designed to balance performance and power consumption.</summary>
 End Enum
 
 '[DllImport("powrprof.dll")]
@@ -187,12 +183,10 @@ Private Declare Function privRegisterPowerSettingNotification Lib "user32" Alias
 
 
 Public Enum ExecutionStates
-    '/// <summary>No state configured.</summary>
-    None = &H0&
-    '/// <summary>Forces the system to be in the working state by resetting the system idle timer.</summary>
-    SystemRequired = &H1&
-    '/// <summary>Forces the display to be on by resetting the display idle timer.</summary>
-    DisplayRequired = &H2&
+    None = &H0&            '/// <summary>No state configured.</summary>
+    SystemRequired = &H1&  '/// <summary>Forces the system to be in the working state by resetting the system idle timer.</summary>
+    DisplayRequired = &H2& '/// <summary>Forces the display to be on by resetting the display idle timer.</summary>
+    
     '/// <summary>
     '/// Enables away mode. This value must be specified with ES_CONTINUOUS. Away mode should be used only by media-recording and
     '/// media-distribution applications that must perform critical background processing on desktop computers while the computer appears
@@ -201,6 +195,7 @@ Public Enum ExecutionStates
     '/// Windows Server 2003 and Windows XP/2000: ES_AWAYMODE_REQUIRED is not supported.
     '/// </summary>
     AwayModeRequired = &H40&
+    
     '/// <summary>
     '/// Informs the system that the state being set should remain in effect until the next call that uses ES_CONTINUOUS and one of the
     '/// other state flags is cleared.
@@ -218,29 +213,16 @@ Public Guid_HighPerformance As Guid ' = new Guid(2355003354u, 59583, 19094, 154,
 Public Guid_PowerSaver      As Guid ' = new Guid(2709787400u, 13633, 20395, 188, 129, 247, 21, 86, 242, 11, 74);
 
 Public Enum PowerSource
-    '/// <summary>
-    '/// The computer is powered by an AC power source or a similar device, such as a laptop powered by a 12V automotive adapter.
-    '/// </summary>
-    AC
-    '/// <summary>
-    '/// The computer is powered by a built-in battery. A battery has a limited amount of power; applications should conserve resources
-    '/// where possible.
-    '/// </summary>
-    Battery
-    '/// <summary>The computer is powered by a short-term power source such as a UPS device.</summary>
-    Ups
+    AC      '/// <summary> The computer is powered by an AC power source or a similar device, such as a laptop powered by a 12V automotive adapter.</summary>
+    Battery '/// <summary> The computer is powered by a built-in battery. A battery has a limited amount of power; applications should conserve resources where possible. </summary>
+    Ups     '/// <summary>The computer is powered by a short-term power source such as a UPS device.</summary>
 End Enum
 Public Enum RestartRestrictions
-    '/// <summary>Always restart the application.</summary>
-    None = &H0&
-    '/// <summary>Do not restart when the application has crashed.</summary>
-    NotOnCrash = &H1&
-    '/// <summary>Do not restart when the application is hung.</summary>
-    NotOnHang = &H2&
-    '/// <summary>Do not restart when the application is terminated due to a system update.</summary>
-    NotOnPatch = &H4&
-    '/// <summary>Do not restart when the application is terminated because of a system reboot.</summary>
-    NotOnReboot = &H8&
+    None = &H0&        '/// <summary>Always restart the application.</summary>
+    NotOnCrash = &H1&  '/// <summary>Do not restart when the application has crashed.</summary>
+    NotOnHang = &H2&   '/// <summary>Do not restart when the application is hung.</summary>
+    NotOnPatch = &H4&  '/// <summary>Do not restart when the application is terminated due to a system update.</summary>
+    NotOnReboot = &H8& '/// <summary>Do not restart when the application is terminated because of a system reboot.</summary>
 End Enum
 
 

@@ -12,6 +12,7 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
+'// Microsoft.WindowsAPICodePack.ApplicationServices.BatteryState
 Private m_SystemBatteryState As SystemBatteryState
 
 Private Sub Class_Initialize()
@@ -75,16 +76,20 @@ Friend Function ToStr() As String
 '                      EstimatedTimeRemaining, _
 '                      SuggestedCriticalBatteryCharge, _
 '                      SuggestedBatteryWarningCharge)
-    ToStr = "BatteryState" & vbCrLf & _
+    Dim s As String
+        s = "BatteryState" & vbCrLf & _
             "{" & vbCrLf & _
             "    ACOnline                       = " & Me.ACOnline & ";" & vbCrLf & _
-            "    MaxCharge                      = " & Me.MaxCharge & ";" & vbCrLf & _
-            "    CurrentCharge                  = " & Me.CurrentCharge & " (" & CLng(Me.CurrentCharge / Me.MaxCharge * 100) & "%)" & ";" & vbCrLf & _
-            "    ChargeRate                     = " & Me.ChargeRate & ";" & vbCrLf & _
+            "    MaxCharge                      = " & Me.MaxCharge & ";" & vbCrLf
+If Me.MaxCharge <> 0 Then
+    s = s & "    CurrentCharge                  = " & Me.CurrentCharge & " (" & CLng(Me.CurrentCharge / Me.MaxCharge * 100) & "%)" & ";" & vbCrLf
+End If
+    s = s & "    ChargeRate                     = " & Me.ChargeRate & ";" & vbCrLf & _
             "    EstimatedTimeRemaining         = " & Me.EstimatedTimeRemaining & ";" & vbCrLf & _
             "    SuggestedCriticalBatteryCharge = " & Me.SuggestedCriticalBatteryCharge & ";" & vbCrLf & _
             "    SuggestedBatteryWarningCharge  = " & Me.SuggestedBatteryWarningCharge & ";" & vbCrLf & _
             "}"
+    ToStr = s
 End Function
 '/// <summary>A snapshot of the state of the battery.</summary>
 'public class BatteryState

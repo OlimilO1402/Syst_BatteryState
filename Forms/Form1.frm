@@ -19,22 +19,21 @@ Begin VB.Form Form1
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   2775
-      Left            =   120
+      Height          =   3255
+      Left            =   0
       MultiLine       =   -1  'True
       ScrollBars      =   3  'Beides
       TabIndex        =   1
-      Text            =   "Form1.frx":0000
-      Top             =   960
-      Width           =   5655
+      Top             =   600
+      Width           =   5895
    End
    Begin VB.CommandButton Command1 
       Caption         =   "How's your battery doing?"
-      Height          =   495
-      Left            =   960
+      Height          =   375
+      Left            =   120
       TabIndex        =   0
-      Top             =   360
-      Width           =   3375
+      Top             =   120
+      Width           =   2535
    End
 End
 Attribute VB_Name = "Form1"
@@ -43,8 +42,26 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+'
+'https://www.nuget.org/packages/Microsoft-WindowsAPICodePack-Core/
+'https://www.nuget.org/packages/Microsoft-WindowsAPICodePack-Shell/
+'Microsoft.WindowsAPICodePack.ApplicationServices.BatteryState
+
 
 Private Sub Command1_Click()
-    Dim BatState As New BatteryState
-    Text1.Text = BatState.ToStr
+    Dim BatS As BatteryState: Set BatS = MPowerManager.GetCurrentBatteryState
+    Text1.Text = BatS.ToStr
+    
+    Dim obj As Object: Set obj = MPower.GetSystemPowerCapabilities
+    
+    
+    'MPower.
+End Sub
+
+Private Sub Form_Resize()
+    Dim L As Single
+    Dim T As Single: T = Text1.Top
+    Dim W As Single: W = Me.ScaleWidth
+    Dim H As Single: H = Me.ScaleHeight - T
+    If W > 0 And H > 0 Then Text1.Move L, T, W, H
 End Sub
