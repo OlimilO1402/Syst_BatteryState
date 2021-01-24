@@ -65,6 +65,16 @@ End Property
 Public Property Get SuggestedCriticalBatteryCharge() As Long
     SuggestedCriticalBatteryCharge = m_SystemBatteryState.DefaultAlert1
 End Property
+
+'[BatteryStateStringRepresentation,
+'ACOnline: {1}
+'{0}Max Charge: {2} mWh
+'{0}Current Charge: {3} mWh
+'{0}Discharge Rate: {4} mWh
+'{0}Estimated Time Remaining: {5}
+'{0}Suggested Critical Battery Charge: {6} mWh
+'{0}Suggested Battery Warning Charge: {7} mWh
+'{0}]
 Friend Function ToStr() As String
 'return string.Format( CultureInfo.InvariantCulture, _
 '                      LocalizedMessages.BatteryStateStringRepresentation, _
@@ -80,14 +90,14 @@ Friend Function ToStr() As String
         s = "BatteryState" & vbCrLf & _
             "{" & vbCrLf & _
             "    ACOnline                       = " & Me.ACOnline & ";" & vbCrLf & _
-            "    MaxCharge                      = " & Me.MaxCharge & ";" & vbCrLf
+            "    Max Charge                     = " & Me.MaxCharge & "mWh;" & vbCrLf
 If Me.MaxCharge <> 0 Then
-    s = s & "    CurrentCharge                  = " & Me.CurrentCharge & " (" & CLng(Me.CurrentCharge / Me.MaxCharge * 100) & "%)" & ";" & vbCrLf
+    s = s & "    CurrentCharge                  = " & Me.CurrentCharge & " (" & CLng(Me.CurrentCharge / Me.MaxCharge * 100) & "%)" & "mWh;" & vbCrLf
 End If
-    s = s & "    ChargeRate                     = " & Me.ChargeRate & ";" & vbCrLf & _
+    s = s & "    ChargeRate                     = " & Me.ChargeRate & "mWh;" & vbCrLf & _
             "    EstimatedTimeRemaining         = " & Me.EstimatedTimeRemaining & ";" & vbCrLf & _
-            "    SuggestedCriticalBatteryCharge = " & Me.SuggestedCriticalBatteryCharge & ";" & vbCrLf & _
-            "    SuggestedBatteryWarningCharge  = " & Me.SuggestedBatteryWarningCharge & ";" & vbCrLf & _
+            "    SuggestedCriticalBatteryCharge = " & Me.SuggestedCriticalBatteryCharge & "mWh;" & vbCrLf & _
+            "    SuggestedBatteryWarningCharge  = " & Me.SuggestedBatteryWarningCharge & "mWh;" & vbCrLf & _
             "}"
     ToStr = s
 End Function

@@ -51,11 +51,6 @@ Option Explicit
 Private Sub Command1_Click()
     Dim BatS As BatteryState: Set BatS = MPowerManager.GetCurrentBatteryState
     Text1.Text = BatS.ToStr
-    
-    Dim obj As Object: Set obj = MPower.GetSystemPowerCapabilities
-    
-    
-    'MPower.
 End Sub
 
 Private Sub Form_Resize()
