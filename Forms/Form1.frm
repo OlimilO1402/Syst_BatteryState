@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin VB.Form Form1 
-   Caption         =   "Form1"
+   Caption         =   "BatteryState&PowerCaps"
    ClientHeight    =   3855
    ClientLeft      =   120
    ClientTop       =   465
