@@ -10,6 +10,14 @@ Begin VB.Form FrmBatteryState
    ScaleHeight     =   3855
    ScaleWidth      =   6135
    StartUpPosition =   3  'Windows-Standard
+   Begin VB.CheckBox chkTimer 
+      Caption         =   "Timer"
+      Height          =   255
+      Left            =   4440
+      TabIndex        =   3
+      Top             =   120
+      Width           =   975
+   End
    Begin VB.Timer Timer1 
       Interval        =   5000
       Left            =   5040
@@ -18,10 +26,10 @@ Begin VB.Form FrmBatteryState
    Begin VB.CommandButton Command2 
       Caption         =   "PowerCapabilities"
       Height          =   375
-      Left            =   2520
+      Left            =   2280
       TabIndex        =   2
       Top             =   120
-      Width           =   2295
+      Width           =   2055
    End
    Begin VB.TextBox Text1 
       BeginProperty Font 
@@ -47,7 +55,7 @@ Begin VB.Form FrmBatteryState
       Left            =   120
       TabIndex        =   0
       Top             =   120
-      Width           =   2295
+      Width           =   2055
    End
 End
 Attribute VB_Name = "FrmBatteryState"
@@ -63,9 +71,14 @@ Option Explicit
 Dim BatS As BatteryState
 Dim SPwrC As PowerCaps
 
+Private Sub chkTimer_Click()
+    Timer1.Enabled = (chkTimer.Value = vbChecked)
+End Sub
+
 Private Sub Form_Load()
     Set BatS = MPowerManager.GetCurrentBatteryState
     Text1.Text = BatS.ToStr
+    Timer1.Enabled = False
 End Sub
 
 Private Sub Command1_Click()
