@@ -21,11 +21,13 @@ Private Sub Class_Initialize()
 '        {
 '            throw new InvalidOperationException(LocalizedMessages.PowerManagerBatteryNotPresent);
 '        }
-    m_SystemBatteryState = MPower.GetSystemBatteryState
-    If Not CBool(m_SystemBatteryState.boolBatteryPresent) Then
-        'Err.Raise -1, , "InvalidOperationException(LocalizedMessages.PowerManagerBatteryNotPresent)"
-        MsgBox "InvalidOperationException( LocalizedMessages.PowerManagerBatteryNotPresent )"
-    End If
+    Recall False
+'    m_SystemBatteryState = MPower.GetSystemBatteryState
+'    If Not CBool(m_SystemBatteryState.boolBatteryPresent) Then
+'        'Err.Description = "InvalidOperationException(LocalizedMessages.PowerManagerBatteryNotPresent)"
+'        'Err.Raise 0
+'        MsgBox "InvalidOperationException( LocalizedMessages.PowerManagerBatteryNotPresent )"
+'    End If
 '        ACOnline = systemBatteryState.AcOnLine;
 '        MaxCharge = (int)systemBatteryState.MaxCapacity;
 '        CurrentCharge = (int)systemBatteryState.RemainingCapacity;
@@ -43,7 +45,14 @@ Private Sub Class_Initialize()
 '        SuggestedBatteryWarningCharge = (int)systemBatteryState.DefaultAlert2;
 
 End Sub
-
+Public Sub Recall(Optional ByVal loud As Boolean = False)
+    m_SystemBatteryState = MPower.GetSystemBatteryState
+    If Not CBool(m_SystemBatteryState.boolBatteryPresent) Then
+        'Err.Description = "InvalidOperationException(LocalizedMessages.PowerManagerBatteryNotPresent)"
+        'Err.Raise 0
+        If loud Then MsgBox "InvalidOperationException( LocalizedMessages.PowerManagerBatteryNotPresent )"
+    End If
+End Sub
 Public Property Get ACOnline() As Boolean
     ACOnline = m_SystemBatteryState.boolAcOnLine
 End Property
@@ -65,7 +74,13 @@ End Property
 Public Property Get SuggestedCriticalBatteryCharge() As Long
     SuggestedCriticalBatteryCharge = m_SystemBatteryState.DefaultAlert1
 End Property
-
+Private Function Secs_ToStr(ByVal secs As Long) As String
+    Dim est As Long: est = secs
+    Dim sec As Long: sec = est Mod 60
+    Dim min As Long: min = (est \ 60) Mod 60
+    Dim hor As Long: hor = Int(est \ 3600)
+    Secs_ToStr = CStr(hor) & ":" & Format(min, "00") & ":" & Format(sec, "00")
+End Function
 '[BatteryStateStringRepresentation,
 'ACOnline: {1}
 '{0}Max Charge: {2} mWh
@@ -95,7 +110,7 @@ If Me.MaxCharge <> 0 Then
     s = s & "    CurrentCharge                  = " & Me.CurrentCharge & " (" & CLng(Me.CurrentCharge / Me.MaxCharge * 100) & "%)" & "mWh;" & vbCrLf
 End If
     s = s & "    ChargeRate                     = " & Me.ChargeRate & "mWh;" & vbCrLf & _
-            "    EstimatedTimeRemaining         = " & Me.EstimatedTimeRemaining & ";" & vbCrLf & _
+            "    EstimatedTimeRemaining         = " & Secs_ToStr(Me.EstimatedTimeRemaining) & ";" & vbCrLf & _
             "    SuggestedCriticalBatteryCharge = " & Me.SuggestedCriticalBatteryCharge & "mWh;" & vbCrLf & _
             "    SuggestedBatteryWarningCharge  = " & Me.SuggestedBatteryWarningCharge & "mWh;" & vbCrLf & _
             "}"

@@ -427,7 +427,11 @@ End Sub
 '        return new BatteryState();
 '    }
 Public Property Get GetCurrentBatteryState() As BatteryState
+Try: On Error GoTo Catch
     Set GetCurrentBatteryState = New BatteryState
+    Exit Property
+Catch:
+    MsgBox Err.Description
 End Property
 '    /// <summary>
 '    /// Allows an application to inform the system that it is in use, thereby preventing the system from entering the sleeping power

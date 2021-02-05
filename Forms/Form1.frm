@@ -10,6 +10,11 @@ Begin VB.Form FrmBatteryState
    ScaleHeight     =   3855
    ScaleWidth      =   6135
    StartUpPosition =   3  'Windows-Standard
+   Begin VB.Timer Timer1 
+      Interval        =   5000
+      Left            =   5040
+      Top             =   120
+   End
    Begin VB.CommandButton Command2 
       Caption         =   "PowerCapabilities"
       Height          =   375
@@ -55,22 +60,31 @@ Option Explicit
 'https://www.nuget.org/packages/Microsoft-WindowsAPICodePack-Core/
 'https://www.nuget.org/packages/Microsoft-WindowsAPICodePack-Shell/
 'Microsoft.WindowsAPICodePack.ApplicationServices.BatteryState
+Dim BatS As BatteryState
+Dim SPwrC As PowerCaps
 
+Private Sub Form_Load()
+    Set BatS = MPowerManager.GetCurrentBatteryState
+    Text1.Text = BatS.ToStr
+End Sub
 
 Private Sub Command1_Click()
-    Dim BatS As BatteryState: Set BatS = MPowerManager.GetCurrentBatteryState
+    BatS.Recall
     Text1.Text = BatS.ToStr
 End Sub
 
 Private Sub Command2_Click()
-    Dim SPwrC As PowerCaps: Set SPwrC = New PowerCaps ' MpowerManager.
+    Set SPwrC = New PowerCaps ' MpowerManager.
     Text1.Text = SPwrC.ToStr
 End Sub
-
 Private Sub Form_Resize()
     Dim L As Single
     Dim T As Single: T = Text1.Top
     Dim W As Single: W = Me.ScaleWidth
     Dim H As Single: H = Me.ScaleHeight - T
     If W > 0 And H > 0 Then Text1.Move L, T, W, H
+End Sub
+
+Private Sub Timer1_Timer()
+    Command1_Click
 End Sub
