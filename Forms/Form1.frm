@@ -1,14 +1,14 @@
 VERSION 5.00
-Begin VB.Form Form1 
+Begin VB.Form FrmBatteryState 
    Caption         =   "BatteryState&PowerCaps"
    ClientHeight    =   3855
    ClientLeft      =   120
    ClientTop       =   465
-   ClientWidth     =   5895
+   ClientWidth     =   6135
    Icon            =   "Form1.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3855
-   ScaleWidth      =   5895
+   ScaleWidth      =   6135
    StartUpPosition =   3  'Windows-Standard
    Begin VB.CommandButton Command2 
       Caption         =   "PowerCapabilities"
@@ -34,7 +34,7 @@ Begin VB.Form Form1
       ScrollBars      =   3  'Beides
       TabIndex        =   1
       Top             =   600
-      Width           =   5895
+      Width           =   6135
    End
    Begin VB.CommandButton Command1 
       Caption         =   "How's your battery doing?"
@@ -45,7 +45,7 @@ Begin VB.Form Form1
       Width           =   2295
    End
 End
-Attribute VB_Name = "Form1"
+Attribute VB_Name = "FrmBatteryState"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
